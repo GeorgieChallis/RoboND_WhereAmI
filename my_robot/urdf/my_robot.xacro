@@ -64,7 +64,7 @@
       />
     </inertial>
 
-    <collision name='collision'>
+    <collision name='left_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
       <geometry>
          <cylinder length="0.05" radius="0.1"/>      
@@ -91,8 +91,8 @@
       />
     </inertial>
 
-    <collision name='collision'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+    <collision name='right_collision'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
       <geometry>
          <cylinder length="0.05" radius="0.1"/>      
       </geometry>
