@@ -6,7 +6,7 @@
   <arg name="x" default="2.465"/>
   <arg name="y" default="-4.446"/>
   <arg name="z" default="0.0808"/>
-  <arg name="roll" default="1.457"/>
+  <arg name="roll" default="0"/>
   <arg name="pitch" default="-0.0856"/>
   <arg name="yaw" default="0.8911"/>
 
