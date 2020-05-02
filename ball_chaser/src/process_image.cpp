@@ -9,12 +9,12 @@ ros::ServiceClient client;
 void drive_robot(float lin_x, float ang_z)
 {
     // Request a service and pass the velocities to it to drive the robot
-    ROS_INFO_STREAM("Driving robot");
+    ROS_INFO_STREAM("Driving robot...");
 
     // Request velocities
     ball_chaser::DriveToTarget srv;
-    srv.request.linear_x = 1.57;
-    srv.request.angular_z = 1.57;
+    srv.request.linear_x = lin_x;
+    srv.request.angular_z = ang_z;
 
     // Call the safe_move service and pass the requested velocities
     if (!client.call(srv))
@@ -25,13 +25,45 @@ void drive_robot(float lin_x, float ang_z)
 // This callback function continuously executes and reads the image data
 void process_image_callback(const sensor_msgs::Image img)
 {
-
+    ROS_INFO_STREAM("Image callback...");
+    ROS_INFO_STREAM("Width: " << img.width);
+    ROS_INFO_STREAM("Height: " << img.height);
+    ROS_INFO_STREAM("Step: " << img.step);
+    ROS_INFO_STREAM("Data size: " << img.data.size());
+    
     int white_pixel = 255;
+    int image_size = img.height * img.step;
+    bool white_detected = false;
 
-    // TODO: Loop through each pixel in the image and check if there's a bright white one
-    // Then, identify if this pixel falls in the left, mid, or right side of the image
-    // Depending on the white ball position, call the drive_bot function and pass velocities to it
-    // Request a stop when there's no white ball seen by the camera
+    float x_val, z_val = 0.0;
+    bool moving = false;
+
+    for (int i = 0; i < image_size; i++){
+      if (img.data[i] == 255){
+	  white_detected = true;
+	  if (i <= img.step*0.3){
+	   // go left
+	   x_val = 0.0;
+	   z_val = 0.5;
+	   moving = true;
+	  }
+	  else if (i <= img.step*0.6){
+           // go forwards
+	   x_val = 0.5;
+	   z_val = 0.0;
+	   moving = true;
+	  }
+          else {
+	   // go right
+	   x_val = 0.0;
+	   z_val = -0.5;
+	   moving = true;
+	  }
+	drive_robot(x_val, z_val);
+	break;
+	}
+      else { if (moving) drive_robot(0.0, 0.0);}
+    }
 }
 
 int main(int argc, char** argv)
@@ -45,6 +77,7 @@ int main(int argc, char** argv)
 
     // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
     ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 10, process_image_callback);
+    ROS_INFO_STREAM("Camera subscriber created.");
 
     // Handle ROS communication events
     ros::spin();
