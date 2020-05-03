@@ -34,16 +34,16 @@ void process_image_callback(const sensor_msgs::Image img)
     bool moving = false;
 
     for (int i = 0; i < image_size; i+=3){
-      if (img.data[i] == 255){
-ROS_INFO_STREAM("pixel: " << i);
+      if (img.data[i] == 255 && img.data[i+1] == 255){
+	    ROS_INFO_STREAM("px " << i);
 	  white_detected = true;
-	  if (i < img.step*0.3){
+	  if (i%img.height < img.step*0.3){
 	   // go left
     ROS_INFO_STREAM("LEFT...");
 	   x_val = 0.0;
 	   z_val = 0.5;
 	  }
-	  else if (i > img.step*0.6){
+	  else if (i%img.height > img.step*0.6){
 //GO RIGHT
             ROS_INFO_STREAM("RIGHT...");
 	   x_val = 0.5;
@@ -51,11 +51,13 @@ ROS_INFO_STREAM("pixel: " << i);
 	  }
           else {
     ROS_INFO_STREAM("FWD.");
-	   x_val = 0.0;
-	   z_val = -0.5;
+	   x_val = 0.5;
+	   z_val = 0.0;
+	   drive_robot(x_val, z_val);
 	  }
 	//drive_robot(x_val, z_val);
 	moving = true;
+	break;
 	}
       if (moving) drive_robot(0.0, 0.0);
     }
@@ -71,7 +73,7 @@ int main(int argc, char** argv)
     client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
 
     // Subscribe to /camera/rgb/image_raw topic to read the image data inside the process_image_callback function
-    ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 5, process_image_callback);
+    ros::Subscriber sub1 = n.subscribe("/camera/rgb/image_raw", 10, process_image_callback);
     ROS_INFO_STREAM("Camera subscriber created.");
 
     // Handle ROS communication events
