@@ -22,9 +22,6 @@ bool handle_command_robot_request(ball_chaser::DriveToTarget::Request& req,
   // Publish angles to drive the robot
   motor_command_publisher.publish(motor_command);
 
-   // Wait 3 seconds to settle
-   ros::Duration(3).sleep();
-
     // Return a response message
     res.msg_feedback = "Robot velocities set: " + std::to_string(linearx_input) + ", " + std::to_string(angularz_input);
     ROS_INFO_STREAM(res.msg_feedback);

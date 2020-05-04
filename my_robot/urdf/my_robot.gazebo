@@ -4,6 +4,18 @@
   <gazebo reference="chassis">
     <material>Gazebo/Turquoise</material>
   </gazebo>
+  <gazebo reference="front_left_wheel">
+    <material>Gazebo/Purple</material>
+  </gazebo>
+  <gazebo reference="front_right_wheel">
+    <material>Gazebo/Purple</material>
+  </gazebo>
+  <gazebo reference="rear_left_wheel">
+    <material>Gazebo/Purple</material>
+  </gazebo>
+  <gazebo reference="rear_right_wheel">
+    <material>Gazebo/Purple</material>
+  </gazebo>
 
   <gazebo>
   <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
@@ -16,9 +28,11 @@
     <wheelSeparation>0.2</wheelSeparation>
     <wheelDiameter>0.1</wheelDiameter>
     <robotBaseFrame>robot_footprint</robotBaseFrame>
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
     <torque>20</torque>
     <topicName>cmd_vel</topicName>
-    <broadcastTF>false</broadcastTF>
+    <broadcastTF>true</broadcastTF>
   </plugin>
 </gazebo>
 

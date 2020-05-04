@@ -15,7 +15,7 @@
   <link name='chassis'>
     <pose>0 0 0.2 0 0 0</pose>
     <inertial>
-      <mass value="10.0"/>
+      <mass value="12.0"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <inertia
           ixx="0.1" ixy="0" ixz="0"
@@ -37,6 +37,38 @@
         <box size=".25 .2 .2"/>
       </geometry>
     </visual>
+
+
+    <collision name='front_caster_collision'>
+      <origin xyz="0.08 0 -0.1" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.0399"/>
+      </geometry>
+    </collision>
+
+    <visual name='front_caster_visual'>
+      <origin xyz="0.08 0 -0.1" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.04"/>
+      </geometry>
+    </visual>
+
+    <collision name='rear_caster_collision'>
+      <origin xyz="-0.08 0 -0.1" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.0399"/>
+      </geometry>
+    </collision>
+
+    <visual name='rear_caster_visual'>
+      <origin xyz="-0.08 0 -0.1" rpy=" 0 0 0"/>
+      <geometry>
+        <sphere radius="0.04"/>
+      </geometry>
+    </visual>
+
+
+
   </link>
 
   <link name='front_left_wheel'>
@@ -149,7 +181,7 @@
 
   <link name='camera'>
      <visual>
-      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0.025 0 0" rpy=" 0 0 0"/>
       <geometry>
         <box size=".05 .05 .05"/>
       </geometry>
@@ -160,7 +192,7 @@
       <geometry>
         <box size=".05 .05 .05"/>
       </geometry>
-      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
 	ixx="1e-6" ixy="0" ixz="0" 
 	iyy="1e-6" iyz="0" 
@@ -169,7 +201,7 @@
     </inertial>
 
     <collision name='collision'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
         <box size=".05 .05 .05"/>    
       </geometry>
@@ -179,7 +211,7 @@
 
   <link name='hokuyo'>
      <visual>
-      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
 	<mesh filename= "package://my_robot/meshes/hokuyo.dae"/>
       </geometry>
@@ -188,9 +220,9 @@
     <inertial name= 'box_inertia'>
       <mass value="1e-5"/>
       <geometry>
-        <box size=".05 .05 .05"/>
+        <box size=".04 .04 .04"/>
       </geometry>
-      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
 	ixx="1e-6" ixy="0" ixz="0" 
 	iyy="1e-6" iyz="0" 
@@ -199,7 +231,7 @@
     </inertial>
 
     <collision name='lidar_collision'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
          <cylinder length="0.05" radius="0.1"/>      
       </geometry>
@@ -208,7 +240,7 @@
   </link>
 
   <joint type="continuous" name="front_left_wheel_hinge">
-    <origin xyz="0.1 0.1 -0.1" rpy="0 0 0"/>
+    <origin xyz="0.1 0.12 -0.1" rpy="0 0 0"/>
     <child link="front_left_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -217,7 +249,7 @@
   </joint>
 
   <joint type="continuous" name="front_right_wheel_hinge">
-    <origin xyz="0.1 -0.1 -0.1" rpy="0 0 0"/>
+    <origin xyz="0.1 -0.12 -0.1" rpy="0 0 0"/>
     <child link="front_right_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -226,7 +258,7 @@
   </joint>
 
   <joint type="continuous" name="rear_left_wheel_hinge">
-    <origin xyz="-0.1 0.1 -0.1" rpy="0 0 0"/>
+    <origin xyz="-0.1 0.12 -0.1" rpy="0 0 0"/>
     <child link="rear_left_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -235,7 +267,7 @@
   </joint>
 
   <joint type="continuous" name="rear_right_wheel_hinge">
-    <origin xyz="-0.1 -0.1 -0.1" rpy="0 0 0"/>
+    <origin xyz="-0.1 -0.12 -0.1" rpy="0 0 0"/>
     <child link="rear_right_wheel"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -244,7 +276,7 @@
   </joint>
 
   <joint type="fixed" name="camera_joint">
-    <origin xyz="0.1 0 0" rpy="0 0 0"/>
+    <origin xyz="0.1 0 0.125" rpy="0 0 0"/>
     <child link="camera"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
@@ -253,7 +285,7 @@
   </joint>
 
   <joint type="fixed" name="hokuyo_joint">
-    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+    <origin xyz="-0.1 0.05 0.125" rpy="0 0 0"/>
     <child link="hokuyo"/>
     <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
