@@ -2,7 +2,7 @@
 Submission for Project 2 of Udacity Robotics Nanodegree: robot design to locate and follow a white ball around a Gazebo world using ROS.
 
 ### Directory Structure
-This project is intended to be built within a (catkin workspace)[http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces]. To build, clone this repo into the `catkin_ws/src` folder and run `catkin_make`.
+This project is intended to be built within a [catkin workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces). To build, clone this repo into the `catkin_ws/src` folder and run `catkin_make`.
 
 ```
     .src                        
