@@ -242,7 +242,7 @@
   <joint type="continuous" name="front_left_wheel_hinge">
     <origin xyz="0.1 0.12 -0.1" rpy="0 0 0"/>
     <child link="front_left_wheel"/>
-    <parent link="robot_footprint"/>
+    <parent link="chassis"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
