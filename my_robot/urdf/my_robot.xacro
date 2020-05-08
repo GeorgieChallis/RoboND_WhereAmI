@@ -13,10 +13,10 @@
   </joint>
 
   <link name='chassis'>
-    <pose>0 0 0.2 0 0 0</pose>
+    <pose>0 0 0 0 0 0</pose>
     <inertial>
       <mass value="12.0"/>
-      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <origin xyz="0.0 0 0.2" rpy=" 0 0 0"/>
       <inertia
           ixx="0.1" ixy="0" ixz="0"
           iyy="0.1" iyz="0"

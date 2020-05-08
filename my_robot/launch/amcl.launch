@@ -5,10 +5,23 @@
 
   <!-- AMCL Node-->
   <node name="amcl" pkg="amcl" type="amcl" output="screen">
-    <param name="odom_frame_id" value="odom"/>
-    <param name="odom_model_type" value="diff-corrected"/>
     <param name="base_frame_id" value="robot_footprint"/>
     <param name="global_frame_id" value="map"/>
+
+     <!-- Odom Parameters -->
+       <param name="odom_model_type" value="diff-corrected"/>
+       <param name="odom_frame_id" value="odom"/>
+       <param name="odom_alpha1" value="0.001"/>
+       <param name="odom_alpha2" value="0.001"/>
+       <param name="odom_alpha3" value="0.001"/>
+       <param name="odom_alpha4" value="0.001"/>
+
+ <!--Overall Filter-->
+       <param name="min_particles" value="100"/>
+       <param name="max_particles" value="500"/>
+       <param name="update_min_d" value="0.01"/>
+       <param name="update_min_a" value="0.005"/>
+       <param name="resample_interval" value="2"/>
 
     <!--Set initial position-->
     <param name="initial_pose_x" value="-5.95"/>
