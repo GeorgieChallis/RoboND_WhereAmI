@@ -7,26 +7,28 @@
   <node name="amcl" pkg="amcl" type="amcl" output="screen">
     <param name="base_frame_id" value="robot_footprint"/>
     <param name="global_frame_id" value="map"/>
+    <param name="laser_model_type" value="likelihood_field"/>
+  
 
      <!-- Odom Parameters -->
-       <param name="odom_model_type" value="diff-corrected"/>
        <param name="odom_frame_id" value="odom"/>
-       <param name="odom_alpha1" value="0.001"/>
-       <param name="odom_alpha2" value="0.001"/>
-       <param name="odom_alpha3" value="0.001"/>
-       <param name="odom_alpha4" value="0.001"/>
+       <param name="odom_model_type" value="diff"/>
+       <param name="odom_alpha1" value="0.005"/>
+       <param name="odom_alpha2" value="0.005"/>
+       <param name="odom_alpha3" value="0.005"/>
+       <param name="odom_alpha4" value="0.005"/>
 
  <!--Overall Filter-->
-       <param name="min_particles" value="100"/>
+       <param name="min_particles" value="40"/>
        <param name="max_particles" value="500"/>
-       <param name="update_min_d" value="0.01"/>
+       <param name="update_min_d" value="0.02"/>
        <param name="update_min_a" value="0.005"/>
-       <param name="resample_interval" value="2"/>
+       <param name="resample_interval" value="1"/>
 
     <!--Set initial position-->
     <param name="initial_pose_x" value="-7"/>
     <param name="initial_pose_y" value="3"/>
-    <param name="initial_pose_a" value="-0.75"/>
+    <param name="initial_pose_a" value="-1.546"/>
   </node>
 
   <!-- Move Base -->
