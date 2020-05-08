@@ -24,8 +24,9 @@
        <param name="resample_interval" value="2"/>
 
     <!--Set initial position-->
-    <param name="initial_pose_x" value="-5.95"/>
-    <param name="initial_pose_y" value="-1.1"/>
+    <param name="initial_pose_x" value="-7"/>
+    <param name="initial_pose_y" value="3"/>
+    <param name="initial_pose_a" value="-0.75"/>
   </node>
 
   <!-- Move Base -->
